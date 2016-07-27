@@ -5,14 +5,14 @@ $params = [
     'buildTime' => '2016-05-16',
 ];
 return [
-    'id'                  => 'console',
-    'basePath'            => dirname(__DIR__),
-    'bootstrap'           => ['log'],
+    'id' => 'console',
+    'basePath' => dirname(__DIR__),
+    'bootstrap' => ['log'],
     'controllerNamespace' => 'app\console',
-    'extensions'          => $web['extensions'],
-    'components'          => [
-        'db'      => $web['components']['db'],
-        'log'     => [
+    'extensions' => $web['extensions'],
+    'components' => [
+        'db' => $web['components']['db'],
+        'log' => [
             'targets' => [
                 [
                     'class'  => 'yii\log\FileTarget',
@@ -21,5 +21,5 @@ return [
             ],
         ],
     ],
-    'params'              => array_merge($web['params'], $params),
+    'params' => array_merge($web['params'], $params),
 ];

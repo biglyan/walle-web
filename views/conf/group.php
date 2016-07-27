@@ -8,7 +8,6 @@ use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use app\models\User;
 use app\models\Group;
-
 ?>
 <div class="row">
     <div class="row col-sm-4">
@@ -17,8 +16,6 @@ use app\models\Group;
             <a href="#modal-form" role="button" class="blue" data-toggle="modal"> <span class="green"><?= $conf->name ?></span> <?= yii::t('conf', 'relation') ?> </a>
         </h4>
     </div>
-
-
     <div class="row col-sm-4" style="margin-top: 5px;float:right;">
         <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
             <div class="input-group">
@@ -38,9 +35,7 @@ use app\models\Group;
         <?php $form->end() ?>
     </div>
 </div>
-
 <div class="col-sm-12 hr hr-18 dotted hr-double"></div>
-
 <div class="row col-sm-12 profile-users clearfix" id="relation-users">
     <?php foreach ($group as $relation) { ?>
     <div class="itemdiv memberdiv">
@@ -81,7 +76,6 @@ use app\models\Group;
         </div>
     </div>
     <?php } ?>
-
 </div>
 
 <script>

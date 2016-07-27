@@ -12,16 +12,14 @@ namespace app\components;
 use yii;
 
 class Controller extends yii\web\Controller {
-
     /**
      * 返回成功
      */
     const SUCCESS = 0;
-
     /**
      * 返回失败
      */
-    const FAIL    = -1;
+    const FAIL = -1;
 
     public $uid = null;
 
@@ -47,7 +45,6 @@ class Controller extends yii\web\Controller {
      */
     public static function renderJson($data, $code = self::SUCCESS, $msg = '', $option = 0) {
         Yii::$app->response->format = yii\web\Response::FORMAT_JSON;
-
         Yii::$app->response->data = [
             'code' => (int)$code,
             'msg'  => $msg,

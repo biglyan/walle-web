@@ -38,9 +38,7 @@ class TaskController extends Controller {
             $list->andWhere(['or', "commit_id like '%" . $kw . "%'", "title like '%" . $kw . "%'"]);
         }
         $tasks = $list->orderBy('id desc');
-        $list = $tasks->offset(($page - 1) * $size)->limit($size)
-            ->asArray()->all();
-
+        $list = $tasks->offset(($page - 1) * $size)->limit($size)->asArray()->all();
         $pages = new Pagination(['totalCount' => $tasks->count(), 'pageSize' => $size]);
         return $this->render('list', [
             'list'  => $list,
@@ -56,30 +54,29 @@ class TaskController extends Controller {
      * @return string
      */
     public function actionSubmit($projectId = null) {
-
         if (!$projectId) {
             // 显示所有项目列表
             $projects = Project::find()
                 ->leftJoin(Group::tableName(), '`group`.`project_id`=`project`.`id`')
                 ->where(['project.status' => Project::STATUS_VALID, '`group`.`user_id`' => $this->uid])
                 ->asArray()->all();
+
             return $this->render('select-project', [
                 'projects' => $projects,
             ]);
         }
 
         $task = new Task();
-
         $conf = Project::getConf($projectId);
         if (!$conf) {
             throw new \Exception(yii::t('task', 'unknown project'));
         }
 
         if (\Yii::$app->request->getIsPost()) {
-
             $group = Group::find()
                 ->where(['user_id' => $this->uid, 'project_id' => $projectId])
                 ->count();
+
             if (!$group) {
                 throw new \Exception(yii::t('task', 'you are not the member of project'));
             }
@@ -145,13 +142,13 @@ class TaskController extends Controller {
         $conf = Project::find()
             ->where(['id' => $this->task->project_id, 'status' => Project::STATUS_VALID])
             ->one();
+
         if (!$conf) {
             throw new \Exception(yii::t('task', 'can\'t rollback the closed project\'s job'));
         }
 
         // 是否需要审核
-        $status = $conf->audit == Project::AUDIT_YES ? Task::STATUS_SUBMIT : Task::STATUS_PASS;
-
+        $status = ($conf->audit == Project::AUDIT_YES) ? Task::STATUS_SUBMIT : Task::STATUS_PASS;
         $rollbackTask = new Task();
         $rollbackTask->attributes = $this->task->attributes;
         $rollbackTask->status = $status;
@@ -162,6 +159,7 @@ class TaskController extends Controller {
             $url = $conf->audit == Project::AUDIT_YES
                 ? '/task/'
                 : '/walle/deploy?taskId=' . $rollbackTask->id;
+
             $this->renderJson([
                 'url' => $url,
             ]);

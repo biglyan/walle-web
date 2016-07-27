@@ -15,12 +15,12 @@ use yii\helpers\Console;
 use app\components\Command;
 
 class WalleController extends Controller {
-
+    // 可写的目录
     public $writablePaths = [
         '@app/runtime',
         '@app/web/assets',
     ];
-
+    // 可执行的目录
     public $executablePaths = [
         '@app/yii',
     ];
