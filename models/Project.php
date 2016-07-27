@@ -39,20 +39,18 @@ use yii\db\Expression;
  * @property \DateTime $created_at
  * @property \DateTime $updated_at
  */
-class Project extends \yii\db\ActiveRecord
-{
-
+class Project extends \yii\db\ActiveRecord {
     // 有效状态
     const STATUS_VALID = 1;
 
     // 测试环境
-    const LEVEL_TEST  = 1;
-
+    const LEVEL_TEST = 1;
     // 仿真环境
-    const LEVEL_SIMU  = 2;
-
+    const LEVEL_SIMU = 2;
     // 线上环境
-    const LEVEL_PROD  = 3;
+    const LEVEL_PROD = 3;
+    // 灰度环境
+    const LEVEL_PRE_PROD = 4;
 
     const AUDIT_YES = 1;
 

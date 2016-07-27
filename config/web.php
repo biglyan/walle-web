@@ -47,6 +47,9 @@ $config = [
                 ],
             ],
         ],
+        'request' => [
+            'baseUrl' => '',
+        ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName'  => false,

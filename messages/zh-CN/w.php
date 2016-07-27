@@ -22,9 +22,10 @@ return [
     'task_status_3_color' => 'text-success',
     'task_status_4_color' => 'text-danger',
 
-    'conf_level_1' => '测试环境',
-    'conf_level_2' => '预发布环境',
-    'conf_level_3' => '线上环境',
+    'conf_level_1' => '测试环境(test)',
+    'conf_level_2' => '生产测试环境(pdtest)',
+    'conf_level_3' => '线上环境(product)',
+    'conf_level_4' => '灰度环境(preproduct)',
 
     'default trunk' => '默认无trunk',
     'conf_status_0' => '无效',

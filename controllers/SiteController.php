@@ -14,15 +14,13 @@ use yii\base\UserException;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
 
-class SiteController extends Controller
-{
+class SiteController extends Controller {
     public $layout = 'site';
 
     /**
      * Render the homepage
      */
-    public function actionIndex()
-    {
+    public function actionIndex() {
         return $this->render('index');
     }
 
@@ -47,10 +45,8 @@ class SiteController extends Controller
     /**
      * User logout
      */
-    public function actionLogout()
-    {
+    public function actionLogout() {
         Yii::$app->user->logout();
-
         return $this->goHome();
     }
 
@@ -84,8 +80,7 @@ class SiteController extends Controller
     /**
      * Confirm email
      */
-    public function actionConfirmEmail($token)
-    {
+    public function actionConfirmEmail($token) {
         $user = User::find()->emailConfirmationToken($token)->one();
         if ($user!==null && $user->removeEmailConfirmationToken(true)) {
             Yii::$app->getUser()->login($user);
@@ -98,8 +93,7 @@ class SiteController extends Controller
     /**
      * Request password reset
      */
-    public function actionRequestPasswordReset()
-    {
+    public function actionRequestPasswordReset() {
         $model = new PasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
@@ -118,8 +112,7 @@ class SiteController extends Controller
     /**
      * Reset password
      */
-    public function actionResetPassword($token)
-    {
+    public function actionResetPassword($token) {
         try {
             $model = new ResetPasswordForm($token);
         } catch (InvalidParamException $e) {
@@ -128,7 +121,6 @@ class SiteController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
             Yii::$app->getSession()->setFlash('success', 'New password was saved.');
-
             return $this->goHome();
         }
 
@@ -137,13 +129,15 @@ class SiteController extends Controller
         ]);
     }
 
-
+    // 查找
     public function actionSearch() {
 
     }
 
+    // 错误处理
     public function actionError() {
-        if (($exception = Yii::$app->getErrorHandler()->exception) === null) {
+        $exception = Yii::$app->getErrorHandler()->exception;
+        if ($exception === null) {
             return '';
         }
 

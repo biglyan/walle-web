@@ -76,14 +76,11 @@ use yii\helpers\Url;
                 <?php } ?>
             </tbody>
         </table>
-
         <!-- 模态框（Modal） -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         </div>
-
     </div><!-- /.box-body -->
 </div>
-
 <script>
     jQuery(function($) {
         $('.btn-delete').click(function(e) {

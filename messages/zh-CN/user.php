@@ -54,4 +54,6 @@ return [
     'add user' => '新增用户',
     'notice account has been opened' => '帐号已经开通，账号信息如下，请点击激活链接进行认证。',
     'email exists' => '用户邮箱已经存在',
+    'bnt sure' => '确认',
+    'btn cancel' => '取消',
 ];
