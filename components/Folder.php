@@ -45,7 +45,6 @@ class Folder extends Ansible {
      * @return bool
      */
     public function initRemoteVersion($version) {
-
         $command = sprintf('mkdir -p %s', Project::getReleaseVersionDir($version));
 
         if (Project::getAnsibleStatus()) {
@@ -67,7 +66,6 @@ class Folder extends Ansible {
      * @throws \Exception
      */
     public function scpCopyFiles(Project $project, TaskModel $task) {
-
         // 1. 宿主机 tar 打包
         $this->_packageFiles($project, $task);
 
@@ -92,7 +90,6 @@ class Folder extends Ansible {
      * @throws \Exception
      */
     public function ansibleCopyFiles(Project $project, TaskModel $task) {
-
         // 1. 宿主机 tar 打包
         $this->_packageFiles($project, $task);
 
@@ -112,7 +109,6 @@ class Folder extends Ansible {
      * @throws \Exception
      */
     protected function _packageFiles(Project $project, TaskModel $task) {
-
         $version = $task->link_id;
         $files = $task->getCommandFiles();
         $excludes = GlobalHelper::str2arr($project->excludes) ;
@@ -139,10 +135,8 @@ class Folder extends Ansible {
      * @throws \Exception
      */
     protected function _copyPackageToServer($remoteHost, Project $project, TaskModel $task) {
-
         $version = $task->link_id;
         $packagePath = Project::getDeployPackagePath($version);
-
         $releasePackage = Project::getReleaseVersionPackage($version);
 
         $scpCommand = sprintf('scp -q -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o CheckHostIP=false -P %d %s %s@%s:%s',
@@ -153,7 +147,6 @@ class Folder extends Ansible {
             $releasePackage);
 
         $ret = $this->runLocalCommand($scpCommand);
-
         if (!$ret) {
             throw new \Exception(yii::t('walle', 'rsync error'));
         }
@@ -168,7 +161,6 @@ class Folder extends Ansible {
      * @throws \Exception
      */
     protected function _copyPackageToServerByAnsible(Project $project, TaskModel $task) {
-
         $version = $task->link_id;
         $packagePath = Project::getDeployPackagePath($version);
 
@@ -188,7 +180,6 @@ class Folder extends Ansible {
      * @throws \Exception
      */
     protected function _unpackageFiles(Project $project, TaskModel $task) {
-
         $version = $task->link_id;
         $releasePackage = Project::getReleaseVersionPackage($version);
 
@@ -225,7 +216,6 @@ class Folder extends Ansible {
      * @throws \Exception
      */
     protected function _unpackageFilesByAnsible(Project $project, TaskModel $task) {
-
         $version = $task->link_id;
         $releasePackage = Project::getReleaseVersionPackage($version);
 
@@ -245,7 +235,6 @@ class Folder extends Ansible {
         );
 
         $command = join(' && ', $cmd);
-
         $ret = $this->runRemoteCommandByAnsibleShell($command);
 
         if (!$ret) {

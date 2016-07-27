@@ -21,13 +21,13 @@ class Repo extends Command {
      */
     public static function getRevision($conf) {
         switch ($conf->repo_type) {
-            case Project::REPO_GIT:
-                return new Git($conf);
-            case Project::REPO_SVN:
-                return new Svn($conf);
-            default:
-                throw new \Exception(\yii::t('walle', 'unknown scm'));
-                break;
+        case Project::REPO_GIT:
+            return new Git($conf);
+        case Project::REPO_SVN:
+            return new Svn($conf);
+        default:
+            throw new \Exception(\yii::t('walle', 'unknown scm'));
+            break;
         }
     }
 }

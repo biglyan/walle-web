@@ -89,7 +89,6 @@ class Command {
         $needTTY = '-T';
 
         foreach (GlobalHelper::str2arr($this->getConfig()->hosts) as $remoteHost) {
-
             $localCommand = sprintf('ssh %s -p %d -q -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o CheckHostIP=false %s@%s %s',
                 $needTTY,
                 $this->getHostPort($remoteHost),
@@ -113,7 +112,6 @@ class Command {
             if (!$this->status) {
                 return false;
             }
-
         }
 
         return true;
